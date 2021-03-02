@@ -30,9 +30,9 @@ class TransactionController extends Controller
             $transaction = Transaction::with(['food', 'user'])->find($id);
             if ($transaction) {
                 return ResponseFormatter::success($transaction, 'Transaction Fetched');
+            } else {
+                return ResponseFormatter::error(null, "Transaction Not Found", 404);
             }
-        } else {
-            return ResponseFormatter::error(null, "Transaction Not Found", 404);
         }
 
         $food = Transaction::with(['food', 'user'])->where('user_id', $request->user()->id);
@@ -61,6 +61,12 @@ class TransactionController extends Controller
         return ResponseFormatter::success($transaction, 'Transaction Updated');
     }
 
+    /**
+     * Checkout transaction api.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function checkout(Request $request)
     {
         $request->validate([
@@ -90,7 +96,7 @@ class TransactionController extends Controller
         $midtrans = [
             'transaction_details' => [
                 'order_id' => $transaction->id,
-                'gross_amount' => $transaction->total,
+                'gross_amount' => (int)$transaction->total,
             ],
             'customer_details' => [
                 'first_name' => $transaction->user->name,

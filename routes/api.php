@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'profile']);
-    Route::post('user', [UserController::class, 'updateProfile']);
+    Route::put('user', [UserController::class, 'updateProfile']);
     Route::post('user/photo', [UserController::class, 'updatePhoto']);
     Route::post('logout', [UserController::class, 'logout']);
 
@@ -32,6 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
-Route::post('foods', [FoodController::class, 'all']);
+Route::get('foods', [FoodController::class, 'all']);
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
 
