@@ -32,10 +32,10 @@ class FoodController extends Controller
 
         $food = Food::query();
         if ($foodName) {
-            $food->where('food_name', 'like', $foodName);
+            $food->where('food_name', 'like', '%' . $foodName . '%');
         }
         if ($category) {
-            $food->where('category', $category);
+            $food->where('category', 'like', '%' . $category . '%');
         }
         if ($minPrice) {
             $food->where('price', '>=', $minPrice);

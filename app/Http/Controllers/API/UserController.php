@@ -42,7 +42,7 @@ class UserController extends Controller
                 throw new Exception('Invalid Credentials');
             }
 
-            $token = $user->createToken('authToken')->plainText;
+            $token = $user->createToken('authToken')->plainTextToken;
 
             return ResponseFormatter::success([
                 'access_token' => $token,
@@ -82,7 +82,7 @@ class UserController extends Controller
                 'phone_number' => $request->phone_number,
             ]);
 
-            $token = $user->createToken('authToken')->plainText;
+            $token = $user->createToken('authToken')->plainTextToken;
 
             return ResponseFormatter::success([
                 'access_token' => $token,
