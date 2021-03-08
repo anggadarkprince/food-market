@@ -10,6 +10,13 @@ class Restaurant extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = ['restaurant_name', 'address', 'description'];
+
+    /**
      * Get the foods for the restaurant.
      */
     public function foods()

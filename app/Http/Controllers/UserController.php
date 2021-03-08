@@ -75,16 +75,15 @@ class UserController extends Controller
     /**
      * Update the specified user in storage.
      *
-     * @param Request $request
+     * @param UserRequest $request
      * @param User $user
      * @return Response|RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
-        if($request->file('picturePath'))
-        {
+        if ($request->file('picturePath')) {
             $data['picturePath'] = $request->file('picturePath')->store('assets/user', 'public');
         }
 
