@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\MidtransController;
+use App\Http\Controllers\API\RestaurantController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user/photo', [UserController::class, 'updatePhoto']);
     Route::post('logout', [UserController::class, 'logout']);
 
-    Route::get('transactions', [TransactionController::class, 'all']);
+    Route::get('transactions', [TransactionController::class, 'index']);
     Route::put('transactions/{id}', [TransactionController::class, 'update']);
     Route::post('checkout', [TransactionController::class, 'checkout']);
 });
@@ -32,6 +33,11 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
-Route::get('foods', [FoodController::class, 'all']);
+Route::get('foods', [FoodController::class, 'index']);
+Route::get('foods/{id}', [FoodController::class, 'show']);
+
+Route::get('restaurants', [RestaurantController::class, 'index']);
+Route::get('restaurants/{id}', [RestaurantController::class, 'show']);
+
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
 

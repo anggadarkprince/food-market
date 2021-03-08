@@ -5,11 +5,18 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Food;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
-    public function all(Request $request)
+    /**
+     * Show all food data.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request)
     {
         $id = $request->input('id');
         $limit = $request->input('limit', 6);
@@ -21,13 +28,7 @@ class FoodController extends Controller
         $maxRate = $request->input('max_rate');
 
         if ($id) {
-            $food = Food::with('restaurant')->find($id);
-
-            if ($food) {
-                return ResponseFormatter::success($food, 'Food Fetched');
-            } else {
-                return ResponseFormatter::error(null, 'Food Not Found', 404);
-            }
+            return $this->show($request, $id);
         }
 
         $food = Food::query()->with('restaurant');
@@ -51,5 +52,23 @@ class FoodController extends Controller
         }
 
         return ResponseFormatter::success($food->paginate($limit), 'Food Fetched');
+    }
+
+    /**
+     * Show food data.
+     *
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function show(Request $request, $id)
+    {
+        $food = Food::with('restaurant')->find($id);
+
+        if ($food) {
+            return ResponseFormatter::success($food, 'Food Fetched');
+        } else {
+            return ResponseFormatter::error(null, 'Food Not Found', 404);
+        }
     }
 }
