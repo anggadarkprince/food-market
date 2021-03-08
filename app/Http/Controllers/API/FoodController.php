@@ -21,7 +21,7 @@ class FoodController extends Controller
         $maxRate = $request->input('max_rate');
 
         if ($id) {
-            $food = Food::find($id);
+            $food = Food::with('restaurant')->find($id);
 
             if ($food) {
                 return ResponseFormatter::success($food, 'Food Fetched');
@@ -30,7 +30,7 @@ class FoodController extends Controller
             }
         }
 
-        $food = Food::query();
+        $food = Food::query()->with('restaurant');
         if ($foodName) {
             $food->where('food_name', 'like', '%' . $foodName . '%');
         }

@@ -25,7 +25,7 @@ class Food extends Model
      * @var array
      */
     protected $fillable = [
-        'food_name', 'description', 'ingredients',
+        'restaurant_id', 'food_name', 'description', 'ingredients',
         'price', 'rating', 'category', 'image'
     ];
 
@@ -59,5 +59,21 @@ class Food extends Model
     public function getImageUrlAttribute()
     {
         return url(Storage::url($this->attributes['image']));
+    }
+
+    /**
+     * Get the transactions for the food.
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * Get the restaurant that owns the food.
+     */
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
     }
 }

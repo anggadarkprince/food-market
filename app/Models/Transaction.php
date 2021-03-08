@@ -44,14 +44,6 @@ class Transaction extends Model
     }
 
     /**
-     * Get the transactions for the user.
-     */
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
-    /**
      * Get the user that owns the transaction.
      */
     public function user()
