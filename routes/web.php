@@ -4,6 +4,7 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
         'users' => UserController::class,
         'restaurants' => RestaurantController::class,
         'foods' => FoodController::class,
+        'transactions' => TransactionController::class,
     ]);
 });
 

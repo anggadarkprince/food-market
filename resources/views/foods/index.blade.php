@@ -12,29 +12,29 @@
                     Create Food
                 </a>
             </div>
-            <div class="bg-white sm:rounded-md shadow p-4 mb-4">
+            <div class="bg-white sm:rounded-md shadow mb-4">
                 <table class="table-auto w-full">
                     <thead>
-                    <tr>
-                        <th class="border px-6 py-2 text-center">No</th>
-                        <th class="border px-6 py-2 text-left">Food Name</th>
-                        <th class="border px-6 py-2 text-left">Restaurant</th>
-                        <th class="border px-6 py-2 text-left">Description</th>
-                        <th class="border px-6 py-2">Price</th>
-                        <th class="border px-6 py-2">Rating</th>
-                        <th class="border px-6 py-2 w-32">Action</th>
+                    <tr class="bg-indigo-500 text-white">
+                        <th class="px-6 py-4 text-center">No</th>
+                        <th class="px-6 py-4 text-left">Food Name</th>
+                        <th class="px-6 py-4 text-left">Restaurant</th>
+                        <th class="px-6 py-4 text-left">Description</th>
+                        <th class="px-6 py-4">Price</th>
+                        <th class="px-6 py-4">Rating</th>
+                        <th class="px-6 py-4 w-32">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y">
                     @forelse($foods as $index => $food)
                     <tr>
-                        <td class="border px-6 py-2 w-20 text-center">{{ $foods->firstItem() + $index }}</td>
-                        <td class="border px-6 py-2">{{ $food->food_name }}</td>
-                        <td class="border px-6 py-2">{{ $food->restaurant->restaurant_name }}</td>
-                        <td class="border px-6 py-2">{{ $food->description }}</td>
-                        <td class="border px-6 py-2 text-center">{{ $food->formatted_price }}</td>
-                        <td class="border px-6 py-2 text-center">{{ $food->rating }}</td>
-                        <td class="border px-6 py-2">
+                        <td class="px-6 py-2 w-20 text-center">{{ $foods->firstItem() + $index }}</td>
+                        <td class="px-6 py-2">{{ $food->food_name }}</td>
+                        <td class="px-6 py-2">{{ $food->restaurant->restaurant_name }}</td>
+                        <td class="px-6 py-2">{{ $food->description }}</td>
+                        <td class="px-6 py-2 text-center">{{ $food->formatted_price }}</td>
+                        <td class="px-6 py-2 text-center">{{ $food->rating }}</td>
+                        <td class="px-6 py-2 text-center">
                             <div class="relative">
                                 <x-jet-dropdown align="right" width="40">
                                     <x-slot name="trigger">

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {!! __('Restaurants &raquo; Show') !!}
+            {!! __('Transactions &raquo; Show') !!}
         </h2>
     </x-slot>
 
@@ -14,23 +14,39 @@
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
                                 Restaurant Name
                             </p>
-                            <p>{{ $restaurant->restaurant_name }}</p>
+                            <p>{{ $transaction->food->restaurant->restaurant_name }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3">
                         <div class="w-full px-3">
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
-                                Address
+                                Food Name
                             </p>
-                            <p>{{ $restaurant->address }}</p>
+                            <p>{{ $transaction->food->food_name }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3">
                         <div class="w-full px-3">
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
-                                Description
+                                User
                             </p>
-                            <p>{{ $restaurant->description }}</p>
+                            <p>{{ $transaction->user->name }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3">
+                        <div class="w-full px-3">
+                            <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
+                                Total Price
+                            </p>
+                            <p>{{ $transaction->formatted_total }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3">
+                        <div class="w-full px-3">
+                            <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
+                                Status
+                            </p>
+                            <p>{{ $transaction->status }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3">
@@ -38,7 +54,7 @@
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
                                 Created At
                             </p>
-                            <p>{{ $restaurant->created_at->format('d F Y H:i') }}</p>
+                            <p>{{ \Carbon\Carbon::parse($transaction->created_at)->format('d F Y H:i') }}</p>
                         </div>
                     </div>
                 </div>

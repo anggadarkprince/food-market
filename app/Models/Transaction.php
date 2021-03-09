@@ -44,6 +44,16 @@ class Transaction extends Model
     }
 
     /**
+     * Custom accessor to get formatted price from price field.
+     *
+     * @return string
+     */
+    public function getFormattedTotalAttribute()
+    {
+        return $this->attributes['total'] = sprintf('Rp. %s', number_format($this->attributes['total'], 0, ',', '.'));
+    }
+
+    /**
      * Get the user that owns the transaction.
      */
     public function user()
