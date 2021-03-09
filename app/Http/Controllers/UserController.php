@@ -84,7 +84,7 @@ class UserController extends Controller
         $data = $request->validated();
 
         if ($request->file('picturePath')) {
-            $data['picturePath'] = $request->file('picturePath')->store('assets/user', 'public');
+            $data['picturePath'] = $request->file('picturePath')->store('assets/users', 'public');
         }
 
         $user->update($data);

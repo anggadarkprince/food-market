@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Restaurants') }}
+            {{ __('Foods') }}
         </h2>
     </x-slot>
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
-                <a href="{{ route('restaurants.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
-                    Create Restaurant
+                <a href="{{ route('foods.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
+                    Create Food
                 </a>
             </div>
             <div class="bg-white sm:rounded-md shadow p-4 mb-4">
@@ -17,19 +17,23 @@
                     <thead>
                     <tr>
                         <th class="border px-6 py-2 text-center">No</th>
-                        <th class="border px-6 py-2">Restaurant Name</th>
-                        <th class="border px-6 py-2">Address</th>
-                        <th class="border px-6 py-2">Description</th>
+                        <th class="border px-6 py-2 text-left">Food Name</th>
+                        <th class="border px-6 py-2 text-left">Restaurant</th>
+                        <th class="border px-6 py-2 text-left">Description</th>
+                        <th class="border px-6 py-2">Price</th>
+                        <th class="border px-6 py-2">Rating</th>
                         <th class="border px-6 py-2 w-32">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($restaurants as $index => $restaurant)
+                    @forelse($foods as $index => $food)
                     <tr>
-                        <td class="border px-6 py-2 w-20 text-center">{{ $restaurants->firstItem() + $index }}</td>
-                        <td class="border px-6 py-2">{{ $restaurant->restaurant_name }}</td>
-                        <td class="border px-6 py-2">{{ $restaurant->address }}</td>
-                        <td class="border px-6 py-2">{{ $restaurant->description }}</td>
+                        <td class="border px-6 py-2 w-20 text-center">{{ $foods->firstItem() + $index }}</td>
+                        <td class="border px-6 py-2">{{ $food->food_name }}</td>
+                        <td class="border px-6 py-2">{{ $food->restaurant->restaurant_name }}</td>
+                        <td class="border px-6 py-2">{{ $food->description }}</td>
+                        <td class="border px-6 py-2 text-center">{{ $food->formatted_price }}</td>
+                        <td class="border px-6 py-2 text-center">{{ $food->rating }}</td>
                         <td class="border px-6 py-2">
                             <div class="relative">
                                 <x-jet-dropdown align="right" width="40">
@@ -46,20 +50,20 @@
 
                                     <x-slot name="content">
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            {{ __('Manage Restaurant') }}
+                                            {{ __('Manage Food') }}
                                         </div>
-                                        <x-jet-dropdown-link href="{{ route('restaurants.show', $restaurant->id) }}">
+                                        <x-jet-dropdown-link href="{{ route('foods.show', $food->id) }}">
                                             {{ __('Show') }}
                                         </x-jet-dropdown-link>
 
-                                        <x-jet-dropdown-link href="{{ route('restaurants.edit', $restaurant->id) }}">
+                                        <x-jet-dropdown-link href="{{ route('foods.edit', $food->id) }}">
                                             {{ __('Edit') }}
                                         </x-jet-dropdown-link>
                                         <div class="border-t border-gray-100"></div>
-                                        <form action="{{ route('restaurants.destroy', $restaurant->id) }}" method="post">
+                                        <form action="{{ route('foods.destroy', $food->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <x-jet-dropdown-link href="{{ route('restaurants.destroy', $restaurant->id) }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            <x-jet-dropdown-link href="{{ route('foods.destroy', $food->id) }}" onclick="event.preventDefault(); this.closest('form').submit();">
                                                 {{ __('Delete') }}
                                             </x-jet-dropdown-link>
                                         </form>
@@ -79,7 +83,7 @@
                 </table>
             </div>
             <div class="text-center">
-                {{ $restaurants->links() }}
+                {{ $foods->links() }}
             </div>
         </div>
     </div>

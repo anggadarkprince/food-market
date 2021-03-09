@@ -1,4 +1,4 @@
-@props(['submit', 'actionUrl', 'formMethod'])
+@props(['submit', 'actionUrl', 'formMethod', 'enctype'])
 
 <div {{ $attributes->merge(['class' => 'md:grid md:grid-cols-3 md:gap-6']) }}>
     <x-jet-section-title>
@@ -7,8 +7,9 @@
     </x-jet-section-title>
 
     <div class="mt-5 md:mt-0 md:col-span-2">
-        <form {!! isset($actionUrl) ? 'action="' . $actionUrl . '"' : 'wire:submit.prevent="' . $submit . '"'  !!} method="{{ isset($formMethod) ? $formMethod : 'GET' }}">
+        <form {!! isset($actionUrl) ? 'action="' . $actionUrl . '"' : 'wire:submit.prevent="' . $submit . '"'  !!} method="{{ isset($formMethod) ? $formMethod : 'GET' }}" enctype="{{ isset($enctype) ? $enctype : 'application/x-www-form-urlencoded' }}">
             <div class="px-4 py-5 bg-white sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+                @include('partials/alert')
                 <div class="grid grid-cols-6 gap-6">
                     {{ $form }}
                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RestaurantController;
@@ -36,6 +37,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resources([
         'users' => UserController::class,
         'restaurants' => RestaurantController::class,
+        'foods' => FoodController::class,
     ]);
 });
 

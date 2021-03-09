@@ -62,6 +62,16 @@ class Food extends Model
     }
 
     /**
+     * Custom accessor to get formatted price from price field.
+     *
+     * @return string
+     */
+    public function getFormattedPriceAttribute()
+    {
+        return $this->attributes['price'] = sprintf('Rp. %s', number_format($this->attributes['price'], 0, ',', '.'));
+    }
+
+    /**
      * Get the transactions for the food.
      */
     public function transactions()

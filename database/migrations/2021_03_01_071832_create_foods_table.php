@@ -19,7 +19,7 @@ class CreateFoodsTable extends Migration
             $table->text('description')->nullable();
             $table->text('ingredients')->nullable();
             $table->decimal('price');
-            $table->float('rating');
+            $table->float('rating')->default(0);
             $table->string('category')->nullable();
             $table->text('image')->nullable();
             $table->softDeletes();

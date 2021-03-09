@@ -18,17 +18,17 @@
             <x-slot name="form">
                 @csrf
                 @method('put')
-                <div class="col-span-6 sm:col-span-12">
+                <div class="col-span-6">
                     <x-jet-label for="restaurant_name" value="{{ __('Restaurant Name') }}" />
                     <x-jet-input id="restaurant_name" name="restaurant_name" type="text" class="mt-1 block w-full" value="{{ old('restaurant_name', $restaurant->restaurant_name) }}" autocomplete="restaurant_name" placeholder="Restaurant name" />
                     <x-jet-input-error for="restaurant_name" class="mt-2" />
                 </div>
-                <div class="col-span-6 sm:col-span-12">
+                <div class="col-span-6">
                     <x-jet-label for="description" value="{{ __('Description') }}" />
                     <x-jet-input id="description" name="description" type="text" class="mt-1 block w-full" value="{{ old('description', $restaurant->description) }}" autocomplete="description" placeholder="About restaurant" />
                     <x-jet-input-error for="description" class="mt-2" />
                 </div>
-                <div class="col-span-6 sm:col-span-12">
+                <div class="col-span-6">
                     <x-jet-label for="address" value="{{ __('Address') }}" />
                     <x-jet-input id="address" name="address" type="text" class="mt-1 block w-full" value="{{ old('address', $restaurant->address) }}" autocomplete="address" placeholder="Restaurant location" />
                     <x-jet-input-error for="address" class="mt-2" />
