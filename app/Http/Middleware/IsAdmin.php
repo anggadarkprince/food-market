@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
@@ -20,6 +21,10 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect('/');
+        if (Auth::check()) {
+            Auth::guard('web')->logout();
+        }
+
+        return redirect('/login')->withErrors(['error' => 'You are not an Administrator!']);
     }
 }

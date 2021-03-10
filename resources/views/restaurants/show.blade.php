@@ -44,5 +44,29 @@
                 </div>
             </div>
         </div>
+
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <h1 class="text-lg mb-3 font-bold text-indigo-500">List Foods</h1>
+            <div class="grid sm:grid-cols-3 gap-5">
+                @foreach($restaurant->foods as $food)
+                    <div class="bg-white sm:rounded-md shadow-sm flex items-center">
+                        <img src="{{ $food->image_url }}" alt="{{ $food->food_name }}" class="sm:rounded-bl-md sm:rounded-tl-md object-cover h-32 w-32">
+                        <div class="p-5 w-full">
+                            <h1 class="text-xl font-medium">{{ $food->food_name }}</h1>
+                            <p class="text-gray-500 mb-2">{{ $food->description ?? $food->category }}</p>
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold">{{ $food->formatted_price }}</h3>
+                                <div class="flex items-center text-yellow-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                                    </svg>
+                                    <strong class="ml-1">{{ $food->rating }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 </x-app-layout>

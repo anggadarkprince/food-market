@@ -36,7 +36,7 @@
                         <td class="px-6 py-2 text-center">{{ $food->rating }}</td>
                         <td class="px-6 py-2 text-center">
                             <div class="relative">
-                                <x-jet-dropdown align="right" width="40">
+                                <x-jet-dropdown align="right" width="40" dropdownClasses="text-left">
                                     <x-slot name="trigger">
                                         <div class="inline-flex rounded-md">
                                             <button type="button" class="text-white inline-flex items-center px-4 py-2 border border-transparent leading-4 text-sm font-semibold tracking-wide rounded bg-blue-500 hover:bg-blue:600 focus:outline-none transition ease-in-out duration-150">

@@ -58,7 +58,9 @@ class Food extends Model
      */
     public function getImageUrlAttribute()
     {
-        return url(Storage::url($this->attributes['image']));
+        return $this->attributes['image']
+            ? url(Storage::url($this->attributes['image']))
+            : 'https://ui-avatars.com/api/?name='.urlencode($this->attributes['food_name']).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**
