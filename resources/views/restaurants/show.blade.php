@@ -7,6 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h1 class="text-lg mb-3 mx-3 sm:mx-0 text-gray-800 font-semibold">Restaurant Detail</h1>
             <div class="bg-white sm:rounded-md shadow-sm p-6 mb-4">
                 <div class="grid sm:grid-cols-2 gap-5">
                     <div class="flex flex-wrap -mx-3">
@@ -46,13 +47,17 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <h1 class="text-lg mb-3 font-bold text-indigo-500">List Foods</h1>
+            <h1 class="text-lg mb-3 text-gray-800 font-semibold">List Foods</h1>
             <div class="grid sm:grid-cols-3 gap-5">
                 @foreach($restaurant->foods as $food)
                     <div class="bg-white sm:rounded-md shadow-sm flex items-center">
                         <img src="{{ $food->image_url }}" alt="{{ $food->food_name }}" class="sm:rounded-bl-md sm:rounded-tl-md object-cover h-32 w-32">
                         <div class="p-5 w-full">
-                            <h1 class="text-xl font-medium">{{ $food->food_name }}</h1>
+                            <h1 class="text-xl font-medium">
+                                <a href="{{ route('foods.show', $food) }}" class="hover:text-indigo-500">
+                                    {{ $food->food_name }}
+                                </a>
+                            </h1>
                             <p class="text-gray-500 mb-2">{{ $food->description ?? $food->category }}</p>
                             <div class="flex justify-between items-center">
                                 <h3 class="text-lg font-bold">{{ $food->formatted_price }}</h3>

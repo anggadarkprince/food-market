@@ -29,9 +29,16 @@
                     @forelse($foods as $index => $food)
                     <tr>
                         <td class="px-6 py-2 w-20 text-center">{{ $foods->firstItem() + $index }}</td>
-                        <td class="px-6 py-2">{{ $food->food_name }}</td>
-                        <td class="px-6 py-2">{{ $food->restaurant->restaurant_name }}</td>
-                        <td class="px-6 py-2">{{ $food->description }}</td>
+                        <td class="px-6 py-2">
+                            <img src="{{ url($food->image_url) }}" class="w-8 h-8 object-cover rounded-md inline-block mr-2" alt="Image">
+                            {{ $food->food_name }}
+                        </td>
+                        <td class="px-6 py-2">
+                            <a href="{{ route('restaurants.show', $food->restaurant_id) }}" class="hover:text-indigo-500">
+                                {{ $food->restaurant->restaurant_name }}
+                            </a>
+                        </td>
+                        <td class="px-6 py-2">{{ $food->description ?: $food->category ?: '-' }}</td>
                         <td class="px-6 py-2 text-center">{{ $food->formatted_price }}</td>
                         <td class="px-6 py-2 text-center">{{ $food->rating }}</td>
                         <td class="px-6 py-2 text-center">

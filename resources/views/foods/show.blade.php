@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white sm:rounded-md shadow-sm p-6 mb-4">
-                <div class="grid sm:grid-cols-2 gap-5">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     <div class="flex flex-wrap -mx-3">
                         <div class="w-full px-3">
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
@@ -30,7 +30,7 @@
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
                                 Category
                             </p>
-                            <p>{{ $food->category }}</p>
+                            <p>{{ $food->category ?: '-' }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3">
@@ -38,7 +38,7 @@
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
                                 Description
                             </p>
-                            <p>{{ $food->description }}</p>
+                            <p>{{ $food->description ?: '-' }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3">
@@ -46,7 +46,7 @@
                             <p class="block uppercase text-indigo-500 text-xs font-bold mb-1">
                                 Ingredients
                             </p>
-                            <p>{{ $food->ingredients }}</p>
+                            <p>{{ $food->ingredients ?: '-' }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3">
