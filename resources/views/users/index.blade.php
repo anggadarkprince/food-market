@@ -3,37 +3,35 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Users') }}
         </h2>
+        <a href="{{ route('users.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
+            Create User
+        </a>
     </x-slot>
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-5">
-                <a href="{{ route('users.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
-                    Create User
-                </a>
-            </div>
             <div class="bg-white sm:rounded-md shadow mb-4">
                 <table class="table-auto w-full">
                     <thead>
                     <tr class="bg-indigo-500 text-white">
-                        <th class="border px-6 py-4 text-center">No</th>
-                        <th class="border px-6 py-4 text-left">Name</th>
-                        <th class="border px-6 py-4 text-left">Email</th>
-                        <th class="border px-6 py-4">Role</th>
-                        <th class="border px-6 py-4 w-32">Action</th>
+                        <th class="px-6 py-4 text-center">No</th>
+                        <th class="px-6 py-4 text-left">Name</th>
+                        <th class="px-6 py-4 text-left">Email</th>
+                        <th class="px-6 py-4">Role</th>
+                        <th class="px-6 py-4 w-32">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y">
                     @forelse($users as $index => $user)
-                        <tbody class="divide-y">
-                            <td class="border px-6 py-2 w-20 text-center">{{ $users->firstItem() + $index }}</td>
-                            <td class="border px-6 py-2">
+                        <tr>
+                            <td class="px-6 py-2 w-20 text-center">{{ $users->firstItem() + $index }}</td>
+                            <td class="px-6 py-2">
                                 <img src="{{ url($user->profile_photo_url) }}" class="w-8 h-8 object-cover rounded-md inline-block mr-2" alt="Photo">
                                 {{ $user->name }}
                             </td>
-                            <td class="border px-6 py-2">{{ $user->email }}</td>
-                            <td class="border px-6 py-2 text-center">{{ $user->role }}</td>
-                            <td class="border px-6 py-2 text-center">
+                            <td class="px-6 py-2">{{ $user->email }}</td>
+                            <td class="px-6 py-2 text-center">{{ $user->role }}</td>
+                            <td class="px-6 py-2 text-center">
                                 <div class="relative">
                                     <x-jet-dropdown align="right" width="40" dropdownClasses="text-left">
                                         <x-slot name="trigger">

@@ -3,37 +3,37 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Transactions') }}
         </h2>
+        <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
+            Create Transaction
+        </a>
     </x-slot>
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-5">
-                <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
-                    Create Transaction
-                </a>
-            </div>
             <div class="bg-white sm:rounded-md shadow mb-4">
                 <table class="table-auto w-full">
                     <thead>
                     <tr class="bg-indigo-500 text-white">
-                        <th class="border-b-2 px-6 py-4 text-center">No</th>
-                        <th class="border-b-2 px-6 py-4 text-left">Food</th>
-                        <th class="border-b-2 px-6 py-4 text-left">User</th>
-                        <th class="border-b-2 px-6 py-4">Quantity</th>
-                        <th class="border-b-2 px-6 py-4">Total</th>
-                        <th class="border-b-2 px-6 py-4">Status</th>
-                        <th class="border-b-2 px-6 py-4 w-32">Action</th>
+                        <th class="px-6 py-4 text-center">No</th>
+                        <th class="px-6 py-4 text-left">Food</th>
+                        <th class="px-6 py-4 text-left">User</th>
+                        <th class="px-6 py-4">Quantity</th>
+                        <th class="px-6 py-4">Total</th>
+                        <th class="px-6 py-4">Status</th>
+                        <th class="px-6 py-4">Date</th>
+                        <th class="px-6 py-4 w-32">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y">
                     @forelse($transactions as $index => $transaction)
-                        <tbody class="divide-y">
+                        <tr>
                             <td class="px-6 py-2 w-20 text-center">{{ $transactions->firstItem() + $index }}</td>
                             <td class="px-6 py-2">{{ $transaction->food->food_name }}</td>
                             <td class="px-6 py-2">{{ $transaction->user->name }}</td>
                             <td class="px-6 py-2 text-center">{{ $transaction->quantity }}</td>
                             <td class="px-6 py-2 text-center">{{ $transaction->formatted_total }}</td>
                             <td class="px-6 py-2 text-center">{{ $transaction->status }}</td>
+                            <td class="px-6 py-2 text-center">{{ \Carbon\Carbon::parse($transaction->created_at)->format('d F Y H:i') }}</td>
                             <td class="px-6 py-2 text-center">
                                 <div class="relative">
                                     <x-jet-dropdown align="right" width="40" dropdownClasses="text-left">

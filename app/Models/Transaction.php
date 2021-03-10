@@ -50,7 +50,7 @@ class Transaction extends Model
      */
     public function getFormattedTotalAttribute()
     {
-        return $this->attributes['total'] = sprintf('Rp. %s', number_format($this->attributes['total'], 0, ',', '.'));
+        return sprintf('Rp. %s', number_format($this->attributes['total'], 0, ',', '.'));
     }
 
     /**
@@ -67,5 +67,13 @@ class Transaction extends Model
     public function food()
     {
         return $this->belongsTo(Food::class);
+    }
+
+    /**
+     * Get the details for the transaction.
+     */
+    public function transactionDetails()
+    {
+        return $this->hasMany(TransactionDetail::class);
     }
 }

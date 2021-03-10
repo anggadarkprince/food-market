@@ -3,29 +3,27 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Restaurants') }}
         </h2>
+        <a href="{{ route('restaurants.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
+            Create Restaurant
+        </a>
     </x-slot>
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-5">
-                <a href="{{ route('restaurants.create') }}" class="inline-flex items-center px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 text-sm font-semibold tracking-wide">
-                    Create Restaurant
-                </a>
-            </div>
             <div class="bg-white sm:rounded-md shadow mb-4">
                 <table class="table-auto w-full">
                     <thead>
                     <tr class="bg-indigo-500 text-white">
-                        <th class="border px-6 py-4 text-center">No</th>
-                        <th class="border px-6 py-4 text-left">Restaurant Name</th>
-                        <th class="border px-6 py-4 text-left">Address</th>
-                        <th class="border px-6 py-4 text-left">Description</th>
-                        <th class="border px-6 py-4 w-32">Action</th>
+                        <th class="px-6 py-4 text-center">No</th>
+                        <th class="px-6 py-4 text-left">Restaurant Name</th>
+                        <th class="px-6 py-4 text-left">Address</th>
+                        <th class="px-6 py-4 text-left">Description</th>
+                        <th class="px-6 py-4 w-32">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y">
                     @forelse($restaurants as $index => $restaurant)
-                        <tbody class="divide-y">
+                        <tr>
                             <td class="px-6 py-2 w-20 text-center">{{ $restaurants->firstItem() + $index }}</td>
                             <td class="px-6 py-2">{{ $restaurant->restaurant_name }}</td>
                             <td class="px-6 py-2">{{ $restaurant->address }}</td>
