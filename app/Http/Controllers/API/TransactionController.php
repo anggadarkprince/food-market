@@ -35,7 +35,7 @@ class TransactionController extends Controller
             }
         }
 
-        $food = Transaction::with(['food', 'user'])->where('user_id', $request->user()->id);
+        $food = Transaction::with(['food', 'user', 'transactionDetails'])->where('user_id', $request->user()->id);
         if ($foodId) {
             $food->where('food_id', $foodId);
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -110,9 +111,15 @@ class UserController extends Controller
         return ResponseFormatter::success(['status' => $result], 'Token Revoked');
     }
 
+    /**
+     * Show profile data api.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function profile(Request $request)
     {
-        return ResponseFormatter::success($request->user(), 'User Fetched');
+        return ResponseFormatter::success(new UserResource($request->user()), 'User Fetched');
     }
 
     /**

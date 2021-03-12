@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FoodCollection;
+use App\Http\Resources\FoodResource;
 use App\Models\Food;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class FoodController extends Controller
 {
@@ -14,7 +17,7 @@ class FoodController extends Controller
      * Show all food data.
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonResponse|AnonymousResourceCollection
      */
     public function index(Request $request)
     {
@@ -51,7 +54,7 @@ class FoodController extends Controller
             $food->where('rating', '<=', $maxPrice);
         }
 
-        return ResponseFormatter::success($food->paginate($limit), 'Food Fetched');
+        return FoodResource::collection($food->paginate($limit));
     }
 
     /**

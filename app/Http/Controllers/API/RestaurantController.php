@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RestaurantResource;
 use App\Models\Restaurant;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RestaurantController extends Controller
 {
@@ -14,7 +16,7 @@ class RestaurantController extends Controller
      * Show all food data.
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonResponse|AnonymousResourceCollection
      */
     public function index(Request $request)
     {
@@ -26,12 +28,12 @@ class RestaurantController extends Controller
             return $this->show($request, $id);
         }
 
-        $food = Restaurant::query()->with('foods');
+        $restaurant = Restaurant::query()->with('foods');
         if ($restaurantName) {
-            $food->where('restaurant_name', 'like', '%' . $restaurantName . '%');
+            $restaurant->where('restaurant_name', 'like', '%' . $restaurantName . '%');
         }
 
-        return ResponseFormatter::success($food->paginate($limit), 'Restaurant Fetched');
+        return RestaurantResource::collection($restaurant->paginate($limit));
     }
 
     /**
