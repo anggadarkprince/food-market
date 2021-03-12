@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -71,6 +72,55 @@ class Food extends Model
     public function getFormattedPriceAttribute()
     {
         return $this->attributes['price'] = sprintf('Rp. %s', number_format($this->attributes['price'], 0, ',', '.'));
+    }
+
+    /**
+     * Scope a query to sort group by specific column.
+     *
+     * @param Builder $query
+     * @param $sortBy
+     * @return Builder
+     */
+    public function scopeSort(Builder $query, $sortBy = 'latest')
+    {
+        switch ($sortBy) {
+            case 'lowest-price':
+                return $query->orderBy('price', 'asc');
+            case 'highest-price':
+                return $query->orderBy('price', 'desc');
+            case 'recommendation':
+                return $query->orderBy('rating', 'desc');
+            case 'latest':
+            case 'relevant':
+            default:
+                return $query->orderBy('created_at', 'desc');
+        }
+    }
+
+    /**
+     * Scope a query to only include group that match the query.
+     *
+     * @param Builder $query
+     * @param string $q
+     * @return Builder
+     */
+    public function scopeQ(Builder $query, $q = '')
+    {
+        if (empty($q)) return $query;
+
+        $columns = [
+            'food_name',
+            'description',
+            'category',
+        ];
+        return $query->where(function (Builder $query) use ($q, $columns) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, 'LIKE', '%' . trim($q) . '%');
+            }
+            $query->orWhereHas('restaurant', function (Builder $query) use ($q) {
+                $query->where('restaurant_name', 'LIKE', '%' . $q . '%');
+            });
+        });
     }
 
     /**

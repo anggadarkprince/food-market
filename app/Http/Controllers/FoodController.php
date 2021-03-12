@@ -8,6 +8,7 @@ use App\Models\Restaurant;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class FoodController extends Controller
@@ -15,11 +16,14 @@ class FoodController extends Controller
     /**
      * Display a listing of the food.
      *
+     * @param Request $request
      * @return Response|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $foods = Food::with('restaurant')->paginate(10);
+        $foods = Food::with('restaurant')
+            ->sort($request->get('sort'))
+            ->paginate(10);
 
         return view('foods.index', compact('foods'));
     }
