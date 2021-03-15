@@ -18,7 +18,11 @@ class RestaurantResource extends JsonResource
         return [
             'id' => $this->id,
             'restaurant_name' => $this->restaurant_name,
-            'address' => $this->address,
+            'location' => [
+                'address' => $this->address,
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+            ],
             'description' => $this->description,
             'foods' => FoodResource::collection($this->whenLoaded('foods')),
         ];
