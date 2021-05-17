@@ -49,6 +49,7 @@ class TransactionController extends Controller
         $food = Food::findOrFail($request->input('food_id'));
         $request->merge([
             'status' => 'PENDING',
+            'restaurant_name' => $food->restaurant->restaurant_name,
             'total' => $request->input('quantity') * $food->price
         ]);
 
@@ -87,12 +88,15 @@ class TransactionController extends Controller
      *
      * @param TransactionRequest $request
      * @param Transaction $transaction
-     * @return Response|RedirectResponse
+     * @return RedirectResponse
      */
     public function update(TransactionRequest $request, Transaction $transaction)
     {
         $food = Food::findOrFail($request->input('food_id'));
-        $request->merge(['total' => $request->input('quantity') * $food->price]);
+        $request->merge([
+            'restaurant_name' => $food->restaurant->restaurant_name,
+            'total' => $request->input('quantity') * $food->price
+        ]);
 
         $transaction->update($request->input());
 
@@ -103,7 +107,7 @@ class TransactionController extends Controller
      * Remove the specified transaction from storage.
      *
      * @param Transaction $transaction
-     * @return Response|RedirectResponse
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(Transaction $transaction)

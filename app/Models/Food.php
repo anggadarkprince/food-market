@@ -31,6 +31,16 @@ class Food extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'image_url',
+        'formatted_price',
+    ];
+
+    /**
      * Accessor to get epoc unix time from created at field.
      *
      * @param $value
@@ -85,7 +95,7 @@ class Food extends Model
     {
         switch ($sortBy) {
             case 'lowest-price':
-                return $query->orderBy('price', 'asc');
+                return $query->orderBy('price');
             case 'highest-price':
                 return $query->orderBy('price', 'desc');
             case 'recommendation':

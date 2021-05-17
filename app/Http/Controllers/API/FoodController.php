@@ -54,7 +54,8 @@ class FoodController extends Controller
             $food->where('rating', '<=', $maxPrice);
         }
 
-        return FoodResource::collection($food->paginate($limit));
+        //return FoodResource::collection($food->paginate($limit));
+        return ResponseFormatter::success($food->paginate($limit));
     }
 
     /**
